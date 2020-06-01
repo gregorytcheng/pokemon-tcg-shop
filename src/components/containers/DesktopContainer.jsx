@@ -2,18 +2,22 @@ import PropTypes from "prop-types";
 import {
   Button,
   Responsive,
-  Segment,
   Menu,
   Visibility,
   Container,
+  Image,
 } from "semantic-ui-react";
 import { getWidth } from "../../utils/WindowUtils";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useHistory, useLocation } from "react-router-dom";
+import { signInWithGoogle, auth } from "./../../utils/FirebaseUtils";
+import UserContext from "./../../contexts/UserContext";
+import Avatar from "../Avatar";
 
 const DesktopContainer = ({ children }) => {
   const history = useHistory();
   const location = useLocation();
+  const user = useContext(UserContext);
   const [fixed, setFixed] = useState(false);
 
   const hideFixedMenu = () => setFixed(false);
@@ -48,10 +52,28 @@ const DesktopContainer = ({ children }) => {
               Shop
             </Menu.Item>
             <Menu.Item position="right">
-              <Button as="a">Log in</Button>
-              <Button as="a" primary={fixed} style={{ marginLeft: "0.5em" }}>
-                Sign Up
-              </Button>
+              {user === null ? (
+                <Button
+                  primary
+                  style={{ marginLeft: "0.5em" }}
+                  onClick={signInWithGoogle}
+                >
+                  Sign in with Google
+                </Button>
+              ) : (
+                <>
+                  <Avatar
+                    displayName={user.displayName}
+                    photoURL={user.photoURL}
+                  />
+                  <Button
+                    style={{ marginLeft: "0.5em" }}
+                    onClick={() => auth.signOut()}
+                  >
+                    Sign out
+                  </Button>
+                </>
+              )}
             </Menu.Item>
           </Container>
         </Menu>
