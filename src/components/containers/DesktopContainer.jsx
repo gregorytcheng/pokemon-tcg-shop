@@ -46,7 +46,7 @@ const DesktopContainer = ({ children }) => {
             </Menu.Item>
             <Menu.Item
               as="a"
-              active={location.pathname === "/shop"}
+              active={location.pathname.startsWith("/shop")}
               onClick={() => history.push("/shop")}
             >
               Shop
@@ -79,9 +79,7 @@ const DesktopContainer = ({ children }) => {
           </Container>
         </Menu>
       </Visibility>
-      <Container style={{ marginTop: "25px", marginBottom: "25px" }}>
-        {children}
-      </Container>
+      <div style={{ marginTop: "25px", marginBottom: "25px" }}>{children}</div>
     </Responsive>
   );
 };

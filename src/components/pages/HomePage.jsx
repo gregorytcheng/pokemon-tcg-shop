@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Header, Image, Segment } from "semantic-ui-react";
+import { Grid, Header, Image, Segment, Container } from "semantic-ui-react";
 
 const HomepageLayout = () => (
   <>
@@ -33,6 +33,44 @@ const HomepageLayout = () => (
           <Grid.Column textAlign="center"></Grid.Column>
         </Grid.Row>
       </Grid>
+    </Segment>
+    <Segment inverted vertical style={{ padding: "5em 0em" }}>
+      <Container>
+        <Grid divided inverted stackable>
+          <Grid.Row>
+            <Grid.Column width={7}>
+              <Header as="h4" inverted>
+                About this project
+              </Header>
+              <p>
+                This is a mock website created in order to showcase my abilities
+                with React. This was built and deployed using Firebase
+                (firestore and OAuth), Semantic UI React, and Heroku.
+                Inspiration for this project was taken from my brother, who
+                placed 2nd in the
+                <a
+                  href="https://bulbapedia.bulbagarden.net/wiki/2015_World_Championships#Senior_Division"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {" "}
+                  2015 TCG World Championship
+                </a>
+                . Feel free to learn more about me and my work experience at my
+                <a
+                  href="https://gregorytcheng.github.io/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {" "}
+                  website
+                </a>
+                .
+              </p>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </Container>
     </Segment>
   </>
 );

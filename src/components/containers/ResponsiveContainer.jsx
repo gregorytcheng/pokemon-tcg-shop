@@ -2,13 +2,13 @@ import React from "react";
 import DesktopContainer from "./DesktopContainer";
 import PropTypes from "prop-types";
 import MobileContainer from "./MobileContainer";
-import { Container, Grid, Header, Segment } from "semantic-ui-react";
+import { Grid, Header, Image, Segment, Container } from "semantic-ui-react";
 
 const ResponsiveContainer = ({ children }, props) => (
   <>
     <DesktopContainer {...props}>{children}</DesktopContainer>
     <MobileContainer {...props}>{children}</MobileContainer>
-    <Segment inverted vertical style={{ padding: "5em 0em" }}>
+    {/* <Segment inverted vertical style={{ padding: "5em 0em" }}>
       <Container>
         <Grid divided inverted stackable>
           <Grid.Row>
@@ -45,7 +45,7 @@ const ResponsiveContainer = ({ children }, props) => (
           </Grid.Row>
         </Grid>
       </Container>
-    </Segment>
+    </Segment> */}
   </>
 );
 
