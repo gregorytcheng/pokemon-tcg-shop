@@ -4,6 +4,7 @@ import HomePage from "./components/pages/HomePage";
 import ResponsiveContainer from "./components/containers/ResponsiveContainer";
 import { auth } from "./utils/FirebaseUtils";
 import UserContext from "./contexts/UserContext";
+import ShopPage from "./components/pages/ShopPage";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -24,6 +25,7 @@ const App = () => {
       <UserContext.Provider value={currentUser}>
         <ResponsiveContainer>
           <Route exact path="/" component={HomePage} />
+          <Route path="/shop" component={ShopPage} />
         </ResponsiveContainer>
       </UserContext.Provider>
     </BrowserRouter>

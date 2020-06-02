@@ -77,8 +77,9 @@ const DesktopContainer = ({ children }) => {
           </Container>
         </Menu>
       </Visibility>
-
-      {children}
+      <Container style={{ marginTop: "25px", marginBottom: "25px" }}>
+        {children}
+      </Container>
     </Responsive>
   );
 };

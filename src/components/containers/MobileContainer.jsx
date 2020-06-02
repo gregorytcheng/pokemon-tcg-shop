@@ -37,14 +37,25 @@ const MobileContainer = ({ children }) => {
         vertical
         visible={sidebarOpened}
       >
-        <Menu.Item as="a" active>
+        <Menu.Item
+          as="a"
+          active
+          onClick={() => {
+            history.push("/");
+            handleSidebarHide();
+          }}
+        >
           Home
         </Menu.Item>
-        <Menu.Item as="a" onClick={() => history.push("/shop")}>
+        <Menu.Item
+          as="a"
+          onClick={() => {
+            history.push("/shop");
+            handleSidebarHide();
+          }}
+        >
           Shop
         </Menu.Item>
-        <Menu.Item as="a">Log in</Menu.Item>
-        <Menu.Item as="a">Sign Up</Menu.Item>
       </Sidebar>
 
       <Sidebar.Pusher dimmed={sidebarOpened}>
@@ -72,14 +83,16 @@ const MobileContainer = ({ children }) => {
                     style={{ marginLeft: "0.5em", cursor: "pointer" }}
                     onClick={() => auth.signOut()}
                   >
-                    <u>(sign out)</u>
+                    (<u>sign out</u>)
                   </div>
                 </>
               )}
             </Menu.Item>
           </Menu>
         </Container>
-        {children}
+        <Container style={{ marginTop: "25px", marginBottom: "25px" }}>
+          {children}
+        </Container>
       </Sidebar.Pusher>
     </Responsive>
   );
