@@ -6,6 +6,7 @@ import { auth } from "./utils/FirebaseUtils";
 import UserContext from "./contexts/UserContext";
 import ShopPage from "./components/pages/ShopPage";
 import CartPage from "./components/pages/CartPage";
+import CardPage from "./components/pages/CardPage";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -26,7 +27,8 @@ const App = () => {
       <UserContext.Provider value={currentUser}>
         <ResponsiveContainer>
           <Route exact path="/" component={HomePage} />
-          <Route path="/shop" component={ShopPage} />
+          <Route exact path="/shop" component={ShopPage} />
+          <Route path="/shop/:cardId" component={CardPage} />
           <Route exact path="/cart" component={CartPage} />
         </ResponsiveContainer>
       </UserContext.Provider>

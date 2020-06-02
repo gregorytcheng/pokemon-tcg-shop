@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Card, Image, Icon } from "semantic-ui-react";
+import { Card, Image, Icon, Dimmer, Loader } from "semantic-ui-react";
 import { firestore } from "../../utils/FirebaseUtils";
 import { financial } from "../../utils/PriceUtils";
 import moment from "moment";
+import { useHistory } from "react-router-dom";
 
 const ShopPage = () => {
   const [cards, setCards] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     firestore
@@ -26,9 +28,13 @@ const ShopPage = () => {
 
   return (
     <Card.Group doubling itemsPerRow={3} stackable>
-      {cards &&
+      {cards.length === 0 ? (
+        <Dimmer active>
+          <Loader />
+        </Dimmer>
+      ) : (
         cards.map((card) => (
-          <Card key={card.id}>
+          <Card key={card.id} onClick={() => history.push(`/shop/${card.id}`)}>
             <Image src={card.avatar} size="small" centered />
             <Card.Content>
               <Card.Header>{card.header}</Card.Header>
@@ -42,7 +48,8 @@ const ShopPage = () => {
               {financial(card.price)}
             </Card.Content>
           </Card>
-        ))}
+        ))
+      )}
     </Card.Group>
   );
 };

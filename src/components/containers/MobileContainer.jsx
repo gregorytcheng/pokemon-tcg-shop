@@ -60,7 +60,7 @@ const MobileContainer = ({ children }) => {
 
       <Sidebar.Pusher dimmed={sidebarOpened}>
         <Container>
-          <Menu pointing secondary size="large">
+          <Menu pointing secondary>
             <Menu.Item onClick={handleToggle}>
               <Icon name="sidebar" />
             </Menu.Item>
@@ -68,6 +68,7 @@ const MobileContainer = ({ children }) => {
               {user === null ? (
                 <Button
                   primary
+                  size={"small"}
                   style={{ marginLeft: "0.5em" }}
                   onClick={signInWithGoogle}
                 >

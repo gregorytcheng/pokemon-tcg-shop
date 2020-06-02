@@ -18,8 +18,10 @@ const ResponsiveContainer = ({ children }, props) => (
               </Header>
               <p>
                 This is a mock website created in order to showcase my abilities
-                with React. Inspiration for this project was taken from my
-                brother, who placed 2nd in the
+                with React. This was built and deployed using Firebase
+                (firestore and OAuth), Semantic UI React, and Heroku.
+                Inspiration for this project was taken from my brother, who
+                placed 2nd in the
                 <a
                   href="https://bulbapedia.bulbagarden.net/wiki/2015_World_Championships#Senior_Division"
                   target="_blank"
