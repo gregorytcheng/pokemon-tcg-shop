@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   Button,
   Container,
@@ -10,9 +10,13 @@ import {
 } from "semantic-ui-react";
 import { getWidth } from "./../../utils/WindowUtils";
 import { useHistory } from "react-router-dom";
+import UserContext from "../../contexts/UserContext";
+import { signInWithGoogle, auth } from "./../../utils/FirebaseUtils";
+import Avatar from "./../Avatar";
 
 const MobileContainer = ({ children }) => {
   const history = useHistory();
+  const user = useContext(UserContext);
 
   const [sidebarOpened, setSidebarOpened] = useState(false);
 
@@ -50,10 +54,28 @@ const MobileContainer = ({ children }) => {
               <Icon name="sidebar" />
             </Menu.Item>
             <Menu.Item position="right">
-              <Button as="a">Log in</Button>
-              <Button as="a" style={{ marginLeft: "0.5em" }}>
-                Sign Up
-              </Button>
+              {user === null ? (
+                <Button
+                  primary
+                  style={{ marginLeft: "0.5em" }}
+                  onClick={signInWithGoogle}
+                >
+                  Sign in with Google
+                </Button>
+              ) : (
+                <>
+                  <Avatar
+                    displayName={user.displayName}
+                    photoURL={user.photoURL}
+                  />
+                  <div
+                    style={{ marginLeft: "0.5em", cursor: "pointer" }}
+                    onClick={() => auth.signOut()}
+                  >
+                    <u>(sign out)</u>
+                  </div>
+                </>
+              )}
             </Menu.Item>
           </Menu>
         </Container>

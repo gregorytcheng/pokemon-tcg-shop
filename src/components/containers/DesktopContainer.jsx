@@ -5,7 +5,6 @@ import {
   Menu,
   Visibility,
   Container,
-  Image,
 } from "semantic-ui-react";
 import { getWidth } from "../../utils/WindowUtils";
 import React, { useState, useContext } from "react";

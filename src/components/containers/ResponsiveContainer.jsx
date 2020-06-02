@@ -23,12 +23,17 @@ const ResponsiveContainer = ({ children }, props) => (
                 <a
                   href="https://bulbapedia.bulbagarden.net/wiki/2015_World_Championships#Senior_Division"
                   target="_blank"
+                  rel="noopener noreferrer"
                 >
                   {" "}
                   2015 TCG World Championship
                 </a>
                 . Feel free to learn more about me and my work experience at my
-                <a href="https://gregorytcheng.github.io/" target="_blank">
+                <a
+                  href="https://gregorytcheng.github.io/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   {" "}
                   website
                 </a>
