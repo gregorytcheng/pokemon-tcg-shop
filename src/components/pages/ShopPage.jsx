@@ -1,106 +1,48 @@
-import React from "react";
-import {
-  Container,
-  Button,
-  Card,
-  Divider,
-  Image,
-  Placeholder,
-  Icon,
-} from "semantic-ui-react";
-
-const cards = [
-  {
-    avatar:
-      "https://assets.pokemon.com/assets/cms2/img/cards/web/XY7/XY7_EN_39.png",
-    date: "Joined in 2013",
-    header: "Helen",
-    description: "Primary Contact",
-  },
-  {
-    avatar:
-      "https://assets.pokemon.com/assets/cms2/img/cards/web/EX15/EX15_EN_21.png",
-    date: "Joined in 2013",
-    header: "Matthew",
-    description: "Primary Contact",
-  },
-  {
-    avatar:
-      "https://assets.pokemon.com/assets/cms2/img/cards/web/HGSS1/HGSS1_EN_9.png",
-    date: "Joined in 2013",
-    header: "Molly",
-    description: "Primary Contact",
-  },
-  {
-    avatar:
-      "https://assets.pokemon.com/assets/cms2/img/cards/web/HGSS1/HGSS1_EN_9.png",
-    date: "Joined in 2013",
-    header: "a",
-    description: "Primary Contact",
-  },
-  {
-    avatar:
-      "https://assets.pokemon.com/assets/cms2/img/cards/web/HGSS1/HGSS1_EN_9.png",
-    date: "Joined in 2013",
-    header: "b",
-    description: "Primary Contact",
-  },
-  {
-    avatar:
-      "https://assets.pokemon.com/assets/cms2/img/cards/web/HGSS1/HGSS1_EN_9.png",
-    date: "Joined in 2013",
-    header: "c",
-    description: "Primary Contact",
-  },
-  {
-    avatar:
-      "https://assets.pokemon.com/assets/cms2/img/cards/web/HGSS1/HGSS1_EN_9.png",
-    date: "Joined in 2013",
-    header: "d",
-    description: "Primary Contact",
-  },
-  {
-    avatar:
-      "https://assets.pokemon.com/assets/cms2/img/cards/web/HGSS1/HGSS1_EN_9.png",
-    date: "Joined in 2013",
-    header: "e",
-    description: "Primary Contact",
-  },
-  {
-    avatar:
-      "https://assets.pokemon.com/assets/cms2/img/cards/web/HGSS1/HGSS1_EN_9.png",
-    date: "Joined in 2013",
-    header: "f",
-    description: "Primary Contact",
-  },
-  {
-    avatar:
-      "https://assets.pokemon.com/assets/cms2/img/cards/web/HGSS1/HGSS1_EN_9.png",
-    date: "Joined in 2013",
-    header: "g",
-    description: "Primary Contact",
-  },
-];
+import React, { useEffect, useState } from "react";
+import { Card, Image, Icon } from "semantic-ui-react";
+import { firestore } from "../../utils/FirebaseUtils";
+import { financial } from "../../utils/PriceUtils";
+import moment from "moment";
 
 const ShopPage = () => {
+  const [cards, setCards] = useState([]);
+
+  useEffect(() => {
+    firestore
+      .collection("cards")
+      .get()
+      .then((cards) => {
+        var newCards = [];
+        cards.forEach((card) => {
+          newCards.push({ ...card.data(), id: card.id });
+        });
+
+        setCards(newCards);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <Card.Group doubling itemsPerRow={3} stackable>
-      {cards.map((card) => (
-        <Card key={card.header}>
-          <Image src={card.avatar} size="small" centered />
-          <Card.Content>
-            <Card.Header>{card.header}</Card.Header>
-            <Card.Meta>{card.date}</Card.Meta>
-            <Card.Description>{card.description}</Card.Description>
-          </Card.Content>
-          <Card.Content extra>
-            <a>
+      {cards &&
+        cards.map((card) => (
+          <Card key={card.id}>
+            <Image src={card.avatar} size="small" centered />
+            <Card.Content>
+              <Card.Header>{card.header}</Card.Header>
+              <Card.Meta>
+                Added {moment.unix(card.created.seconds).fromNow()}
+              </Card.Meta>
+              <Card.Description>{card.name}</Card.Description>
+            </Card.Content>
+            <Card.Content extra>
               <Icon name="dollar" />
-              22.20
-            </a>
-          </Card.Content>
-        </Card>
-      ))}
+              {financial(card.price)}
+            </Card.Content>
+          </Card>
+        ))}
     </Card.Group>
   );
 };

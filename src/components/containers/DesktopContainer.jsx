@@ -5,6 +5,7 @@ import {
   Menu,
   Visibility,
   Container,
+  Icon,
 } from "semantic-ui-react";
 import { getWidth } from "../../utils/WindowUtils";
 import React, { useState, useContext } from "react";
@@ -65,14 +66,15 @@ const DesktopContainer = ({ children }) => {
                     displayName={user.displayName}
                     photoURL={user.photoURL}
                   />
-                  <Button
-                    style={{ marginLeft: "0.5em" }}
+                  <div
+                    style={{ marginLeft: "0.5em", cursor: "pointer" }}
                     onClick={() => auth.signOut()}
                   >
-                    Sign out
-                  </Button>
+                    (<u>sign out</u>)
+                  </div>
                 </>
               )}
+              <Icon name="cart" size="large" />
             </Menu.Item>
           </Container>
         </Menu>

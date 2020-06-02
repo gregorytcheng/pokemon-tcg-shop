@@ -87,6 +87,7 @@ const MobileContainer = ({ children }) => {
                   </div>
                 </>
               )}
+              <Icon name="cart" size="large" />
             </Menu.Item>
           </Menu>
         </Container>

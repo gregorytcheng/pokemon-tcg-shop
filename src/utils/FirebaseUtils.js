@@ -40,22 +40,22 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   return userReference;
 };
 
-export const addCollectionAndDocuments = async (
-  collectionKey,
-  objectsToAdd
-) => {
-  const collectionRef = firestore.collection(collectionKey);
+// export const addCollectionAndDocuments = async (
+//   collectionKey,
+//   objectsToAdd
+// ) => {
+//   const collectionRef = firestore.collection(collectionKey);
 
-  // We are batching our adds in order to make the result of the operation predictable:
-  // either all inserts succeed, or all fail as part of 1 transaction.
-  const batch = firestore.batch();
-  objectsToAdd.forEach((object) => {
-    const newDocumentReference = collectionRef.doc();
-    // Adding each object to the batch
-    batch.set(newDocumentReference, object);
-  });
-  await batch.commit();
-};
+//   // We are batching our adds in order to make the result of the operation predictable:
+//   // either all inserts succeed, or all fail as part of 1 transaction.
+//   const batch = firestore.batch();
+//   objectsToAdd.forEach((object) => {
+//     const newDocumentReference = collectionRef.doc();
+//     // Adding each object to the batch
+//     batch.set(newDocumentReference, object);
+//   });
+//   await batch.commit();
+// };
 
 // Converts a collection snapshot to an object representing the shop data
 export const convertCollectionsSnapshotToMap = (collections) => {
