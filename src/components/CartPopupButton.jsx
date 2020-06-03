@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import CartContext from "../contexts/CartContext";
 import { Button, Icon, Popup, Grid } from "semantic-ui-react";
 import { useHistory } from "react-router-dom";
@@ -6,17 +6,29 @@ import { useHistory } from "react-router-dom";
 const CartPopupButton = () => {
   const history = useHistory();
   const cart = useContext(CartContext);
+  const [popupOpen, setPopupOpen] = useState(false);
+
+  const openPopup = () => {
+    setPopupOpen(true);
+  };
+
+  const closePopup = () => {
+    setPopupOpen(false);
+  };
 
   return (
     <Popup
       wide="very"
+      on="click"
+      open={popupOpen}
+      onOpen={openPopup}
+      onClose={closePopup}
       trigger={
         <Button style={{ marginLeft: "1em" }}>
           <Icon size="large" name="cart" />
           {cart.cartItemsCount}
         </Button>
       }
-      on="click"
       content={
         cart.cartItemsCount === 0 ? (
           "Your cart is empty."
@@ -46,7 +58,13 @@ const CartPopupButton = () => {
                 </Grid.Row>
               ))}
             </Grid>
-            <Button primary onClick={() => history.push("/checkout")}>
+            <Button
+              primary
+              onClick={() => {
+                history.push("/checkout");
+                closePopup();
+              }}
+            >
               Continue to checkout
             </Button>
           </>
