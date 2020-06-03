@@ -7,6 +7,7 @@ import UserContext from "./contexts/UserContext";
 import ShopPage from "./components/pages/ShopPage";
 import CartPage from "./components/pages/CartPage";
 import CardPage from "./components/pages/CardPage";
+import CheckoutPage from "./components/pages/CheckoutPage";
 import CartProvider from "./components/providers/CartProvider";
 
 const App = () => {
@@ -30,8 +31,9 @@ const App = () => {
           <ResponsiveContainer>
             <Route exact path="/" component={HomePage} />
             <Route exact path="/shop" component={ShopPage} />
-            <Route path="/shop/:cardId" component={CardPage} />
+            <Route exact path="/shop/:cardId" component={CardPage} />
             <Route exact path="/cart" component={CartPage} />
+            <Route exact path="/checkout" component={CheckoutPage} />
           </ResponsiveContainer>
         </CartProvider>
       </UserContext.Provider>
