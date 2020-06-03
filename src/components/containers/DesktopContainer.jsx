@@ -5,7 +5,6 @@ import {
   Menu,
   Visibility,
   Container,
-  Icon,
 } from "semantic-ui-react";
 import { getWidth } from "../../utils/WindowUtils";
 import React, { useState, useContext } from "react";
@@ -13,13 +12,12 @@ import { useHistory, useLocation } from "react-router-dom";
 import { signInWithGoogle, auth } from "./../../utils/FirebaseUtils";
 import UserContext from "./../../contexts/UserContext";
 import Avatar from "../Avatar";
-import CartContext from "../../contexts/CartContext";
+import CartPopupButton from "../CartPopupButton";
 
 const DesktopContainer = ({ children }) => {
   const history = useHistory();
   const location = useLocation();
   const user = useContext(UserContext);
-  const cart = useContext(CartContext);
   const [fixed, setFixed] = useState(false);
 
   const hideFixedMenu = () => setFixed(false);
@@ -76,8 +74,7 @@ const DesktopContainer = ({ children }) => {
                   </div>
                 </>
               )}
-              <Icon name="cart" size="large" />
-              {cart.cartItemsCount}
+              <CartPopupButton />
             </Menu.Item>
           </Container>
         </Menu>

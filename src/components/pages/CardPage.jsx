@@ -72,7 +72,9 @@ const CardPage = ({ match }) => {
                               content={"Add to Cart"}
                               size="tiny"
                               style={{ float: "right" }}
-                              onClick={() => addItem(card)}
+                              onClick={() =>
+                                addItem({ ...card, id: match.params.cardId })
+                              }
                             />
                           }
                           content={`✅ ${card.name} added to cart 🛒`}
