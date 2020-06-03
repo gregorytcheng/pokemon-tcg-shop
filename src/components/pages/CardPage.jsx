@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { firestore } from "../../utils/FirebaseUtils";
 import {
   Dimmer,
@@ -9,12 +9,19 @@ import {
   Container,
   Button,
   Segment,
+  Popup,
 } from "semantic-ui-react";
 import moment from "moment";
 import Price from "../Price";
+import { CartContext } from "../../contexts/CartContext";
+
+// 750 milliseconds (0.75 seconds)
+const popupTimeoutLength = 1000;
 
 const CardPage = ({ match }) => {
   const [card, setCard] = useState(undefined);
+  const [popupOpen, setPopupOpen] = useState(false);
+  const { addItem } = useContext(CartContext);
 
   useEffect(() => {
     firestore
@@ -26,6 +33,13 @@ const CardPage = ({ match }) => {
       })
       .catch((error) => console.log(error));
   }, []);
+
+  const handleOpen = () => {
+    setPopupOpen(true);
+    setTimeout(() => {
+      setPopupOpen(false);
+    }, popupTimeoutLength);
+  };
 
   return (
     <Container>
@@ -46,13 +60,28 @@ const CardPage = ({ match }) => {
                 <Container>
                   <Image src={card.avatar} size="medium" centered />
                   <Container style={{ paddingTop: "1em" }}>
-                    <Price price={card.price} />
-                    <Button
-                      primary
-                      content={"Add to Cart"}
-                      size="tiny"
-                      style={{ float: "right" }}
-                    />
+                    <Grid columns={2} stackable>
+                      <Grid.Column>
+                        <Price price={card.price} />
+                      </Grid.Column>
+                      <Grid.Column>
+                        <Popup
+                          trigger={
+                            <Button
+                              primary
+                              content={"Add to Cart"}
+                              size="tiny"
+                              style={{ float: "right" }}
+                              onClick={() => addItem(card)}
+                            />
+                          }
+                          content={`✅ ${card.name} added to cart 🛒`}
+                          on="click"
+                          open={popupOpen}
+                          onOpen={handleOpen}
+                        />
+                      </Grid.Column>
+                    </Grid>
                   </Container>
                 </Container>
               </Grid.Column>

@@ -13,10 +13,12 @@ import { useHistory } from "react-router-dom";
 import UserContext from "../../contexts/UserContext";
 import { signInWithGoogle, auth } from "./../../utils/FirebaseUtils";
 import Avatar from "./../Avatar";
+import { CartContext } from "../../contexts/CartContext";
 
 const MobileContainer = ({ children }) => {
   const history = useHistory();
   const user = useContext(UserContext);
+  const cart = useContext(CartContext);
 
   const [sidebarOpened, setSidebarOpened] = useState(false);
 
@@ -89,6 +91,7 @@ const MobileContainer = ({ children }) => {
                 </>
               )}
               <Icon name="cart" size="large" />
+              {cart.cartItemsCount}
             </Menu.Item>
           </Menu>
         </Container>

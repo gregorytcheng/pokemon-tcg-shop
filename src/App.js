@@ -7,6 +7,7 @@ import UserContext from "./contexts/UserContext";
 import ShopPage from "./components/pages/ShopPage";
 import CartPage from "./components/pages/CartPage";
 import CardPage from "./components/pages/CardPage";
+import CartProvider from "./components/providers/CartProvider";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -25,12 +26,14 @@ const App = () => {
   return (
     <BrowserRouter>
       <UserContext.Provider value={currentUser}>
-        <ResponsiveContainer>
-          <Route exact path="/" component={HomePage} />
-          <Route exact path="/shop" component={ShopPage} />
-          <Route path="/shop/:cardId" component={CardPage} />
-          <Route exact path="/cart" component={CartPage} />
-        </ResponsiveContainer>
+        <CartProvider>
+          <ResponsiveContainer>
+            <Route exact path="/" component={HomePage} />
+            <Route exact path="/shop" component={ShopPage} />
+            <Route path="/shop/:cardId" component={CardPage} />
+            <Route exact path="/cart" component={CartPage} />
+          </ResponsiveContainer>
+        </CartProvider>
       </UserContext.Provider>
     </BrowserRouter>
   );

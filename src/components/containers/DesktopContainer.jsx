@@ -13,11 +13,13 @@ import { useHistory, useLocation } from "react-router-dom";
 import { signInWithGoogle, auth } from "./../../utils/FirebaseUtils";
 import UserContext from "./../../contexts/UserContext";
 import Avatar from "../Avatar";
+import CartContext from "../../contexts/CartContext";
 
 const DesktopContainer = ({ children }) => {
   const history = useHistory();
   const location = useLocation();
   const user = useContext(UserContext);
+  const cart = useContext(CartContext);
   const [fixed, setFixed] = useState(false);
 
   const hideFixedMenu = () => setFixed(false);
@@ -75,6 +77,7 @@ const DesktopContainer = ({ children }) => {
                 </>
               )}
               <Icon name="cart" size="large" />
+              {cart.cartItemsCount}
             </Menu.Item>
           </Container>
         </Menu>

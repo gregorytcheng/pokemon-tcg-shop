@@ -1,14 +1,6 @@
 import React, { useEffect, useState } from "react";
-import {
-  Card,
-  Image,
-  Icon,
-  Dimmer,
-  Loader,
-  Container,
-} from "semantic-ui-react";
+import { Card, Image, Dimmer, Loader, Container } from "semantic-ui-react";
 import { firestore } from "../../utils/FirebaseUtils";
-import { financial } from "../../utils/PriceUtils";
 import Price from "../Price";
 import { useHistory } from "react-router-dom";
 
