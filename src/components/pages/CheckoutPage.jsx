@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Container, Grid, List, Header, Image } from "semantic-ui-react";
 import CartContext from "../../contexts/CartContext";
 import Price from "../Price";
+import StripePaymentButton from "../StripePaymentButton";
 
 const CheckoutPage = () => {
   const cart = useContext(CartContext);
@@ -34,6 +35,12 @@ const CheckoutPage = () => {
             </Grid.Column>
           </Grid.Row>
         ))}
+        <Grid.Row>
+          <Grid.Column></Grid.Column>
+          <Grid.Column>
+            <StripePaymentButton price={cart.cartTotal} />
+          </Grid.Column>
+        </Grid.Row>
       </Grid>
     </Container>
   );
