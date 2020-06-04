@@ -8,13 +8,13 @@ import {
   Header,
   Container,
   Button,
-  Segment,
   Popup,
   List,
 } from "semantic-ui-react";
 import moment from "moment";
 import Price from "../Price";
 import { CartContext } from "../../contexts/CartContext";
+import PostFeed from "../PostFeed";
 
 // 750 milliseconds (0.75 seconds)
 const popupTimeoutLength = 1000;
@@ -55,7 +55,7 @@ const CardPage = ({ match }) => {
             content={card.name}
             subheader={`Added ${moment.unix(card.created.seconds).fromNow()}`}
           />
-          <Grid>
+          <Grid stackable>
             <Grid.Row>
               <Grid.Column width={8}>
                 <Container>
@@ -93,16 +93,11 @@ const CardPage = ({ match }) => {
                   </Container>
                 </Container>
               </Grid.Column>
+              {/* <Grid.Column width={4} /> */}
               <Grid.Column width={8}>
                 <Container>
-                  <Grid columns={2} stackable>
-                    <Grid.Column>
-                      <Segment>Content</Segment>
-                    </Grid.Column>
-                    <Grid.Column>
-                      <Segment>Content</Segment>
-                    </Grid.Column>
-                  </Grid>
+                  <Header>Reviews</Header>
+                  <PostFeed cardId={match.params.cardId} />
                 </Container>
               </Grid.Column>
             </Grid.Row>

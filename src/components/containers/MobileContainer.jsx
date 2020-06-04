@@ -11,7 +11,7 @@ import {
 import { getWidth } from "./../../utils/WindowUtils";
 import { useHistory } from "react-router-dom";
 import UserContext from "../../contexts/UserContext";
-import { signInWithGoogle, auth } from "./../../utils/FirebaseUtils";
+import { signInWithGoogle } from "./../../utils/FirebaseUtils";
 import Avatar from "./../Avatar";
 import CartPopupButton from "../CartPopupButton";
 
@@ -83,7 +83,7 @@ const MobileContainer = ({ children }) => {
                   />
                   <div
                     style={{ marginLeft: "0.5em", cursor: "pointer" }}
-                    onClick={() => auth.signOut()}
+                    onClick={() => user.signOut()}
                   >
                     (<u>sign out</u>)
                   </div>

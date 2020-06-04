@@ -11,7 +11,14 @@ const UserProvider = ({ children }) => {
       if (user) {
         const userReference = await createUserProfileDocument(user);
         userReference.onSnapshot((userSnapshot) => {
-          setCurrentUser({ ...user, id: userSnapshot.id });
+          setCurrentUser({
+            ...user,
+            id: userSnapshot.id,
+            signOut: () => {
+              auth.signOut();
+              setCurrentUser(null);
+            },
+          });
         });
       }
     });

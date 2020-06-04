@@ -9,7 +9,7 @@ import {
 import { getWidth } from "../../utils/WindowUtils";
 import React, { useState, useContext } from "react";
 import { useHistory, useLocation } from "react-router-dom";
-import { signInWithGoogle, auth } from "./../../utils/FirebaseUtils";
+import { signInWithGoogle } from "./../../utils/FirebaseUtils";
 import UserContext from "./../../contexts/UserContext";
 import Avatar from "../Avatar";
 import CartPopupButton from "../CartPopupButton";
@@ -68,7 +68,7 @@ const DesktopContainer = ({ children }) => {
                   />
                   <div
                     style={{ marginLeft: "0.5em", cursor: "pointer" }}
-                    onClick={() => auth.signOut()}
+                    onClick={() => user.signOut()}
                   >
                     (<u>sign out</u>)
                   </div>

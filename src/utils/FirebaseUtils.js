@@ -23,13 +23,14 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
   // If user doesn't exist yet, put a new entry into the snapshot
   if (!snapshot.exists) {
-    const { displayName, email } = userAuth;
+    const { displayName, email, photoURL } = userAuth;
     const createdAt = new Date();
 
     try {
       await userReference.set({
         displayName,
         email,
+        photoURL,
         createdAt,
         ...additionalData,
       });
@@ -38,47 +39,6 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
     }
   }
   return userReference;
-};
-
-// export const addCollectionAndDocuments = async (
-//   collectionKey,
-//   objectsToAdd
-// ) => {
-//   const collectionRef = firestore.collection(collectionKey);
-
-//   // We are batching our adds in order to make the result of the operation predictable:
-//   // either all inserts succeed, or all fail as part of 1 transaction.
-//   const batch = firestore.batch();
-//   objectsToAdd.forEach((object) => {
-//     const newDocumentReference = collectionRef.doc();
-//     // Adding each object to the batch
-//     batch.set(newDocumentReference, object);
-//   });
-//   await batch.commit();
-// };
-
-// Converts a collection snapshot to an object representing the shop data
-export const convertCollectionsSnapshotToMap = (collections) => {
-  const transformedCollection = collections.docs.map((document) => {
-    // At this point, each document represents a collection of shop items
-    const { title, items } = document.data();
-    return {
-      // encodeURI takes a string and gives back a URI-friendly string
-      routeName: encodeURI(title.toLowerCase()),
-      id: document.id,
-      title,
-      items,
-    };
-  });
-
-  // Converts the resulting array to a map with key/value pairs
-  // The accumulator represents the final object that we return.
-  // The collection represents our original transformedCollection, and
-  // the empty object at the end represents our initial accumulator object.
-  return transformedCollection.reduce((accumulator, collection) => {
-    accumulator[collection.title.toLowerCase()] = collection;
-    return accumulator;
-  }, {});
 };
 
 firebase.initializeApp(config);
