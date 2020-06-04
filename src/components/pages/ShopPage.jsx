@@ -5,8 +5,6 @@ import {
   Dimmer,
   Loader,
   Container,
-  Search,
-  Header,
   Input,
 } from "semantic-ui-react";
 import { firestore } from "../../utils/FirebaseUtils";
