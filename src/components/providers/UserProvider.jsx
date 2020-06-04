@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { auth } from "../../utils/FirebaseUtils";
+import { auth, createUserProfileDocument } from "../../utils/FirebaseUtils";
 import UserContext from "../../contexts/UserContext";
 import PropTypes from "prop-types";
 
@@ -7,8 +7,13 @@ const UserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
-    var unsubscribe = auth.onAuthStateChanged((user) => {
-      setCurrentUser(user);
+    var unsubscribe = auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        const userReference = await createUserProfileDocument(user);
+        userReference.onSnapshot((userSnapshot) => {
+          setCurrentUser({ ...user, id: userSnapshot.id });
+        });
+      }
     });
 
     // Cleanup function allows us to unsubscribe before unmount
