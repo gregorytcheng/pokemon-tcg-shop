@@ -3,7 +3,6 @@ import { BrowserRouter, Route } from "react-router-dom";
 import HomePage from "./components/pages/HomePage";
 import ResponsiveContainer from "./components/containers/ResponsiveContainer";
 import ShopPage from "./components/pages/ShopPage";
-import CartPage from "./components/pages/CartPage";
 import CardPage from "./components/pages/CardPage";
 import CheckoutPage from "./components/pages/CheckoutPage";
 import CartProvider from "./components/providers/CartProvider";
@@ -18,7 +17,6 @@ const App = () => {
             <Route exact path="/" component={HomePage} />
             <Route exact path="/shop" component={ShopPage} />
             <Route exact path="/shop/:cardId" component={CardPage} />
-            <Route exact path="/cart" component={CartPage} />
             <Route exact path="/checkout" component={CheckoutPage} />
           </ResponsiveContainer>
         </CartProvider>

@@ -10,6 +10,7 @@ import {
   Button,
   Segment,
   Popup,
+  List,
 } from "semantic-ui-react";
 import moment from "moment";
 import Price from "../Price";
@@ -62,7 +63,12 @@ const CardPage = ({ match }) => {
                   <Container style={{ paddingTop: "1em" }}>
                     <Grid columns={2} stackable>
                       <Grid.Column>
-                        <Price price={card.price} />
+                        <List>
+                          <List.Item>{card.description}</List.Item>
+                          <List.Item>
+                            <Price price={card.price} />
+                          </List.Item>
+                        </List>
                       </Grid.Column>
                       <Grid.Column>
                         <Popup
