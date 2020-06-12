@@ -53,3 +53,6 @@ export const getCartTotal = (cartItems) =>
       accumulatedQuantity + cartItem.quantity * cartItem.price,
     0
   );
+
+// localStorage key for persistence
+export const LOCAL_STORAGE_CART_KEY = "cart";

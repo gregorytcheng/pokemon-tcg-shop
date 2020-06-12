@@ -48,4 +48,8 @@ const PostFeed = ({ cardId }) => {
   );
 };
 
+PostFeed.propTypes = {
+  cardId: PropTypes.string,
+};
+
 export default PostFeed;
